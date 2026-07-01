@@ -3,46 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Master</title>
+    <title>Quiz Master | Knowledge Challenge</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="quiz-container">
-    <div class="quiz-header">
-        <h1>Knowledge Quiz</h1>
-        <div class="progress-container">
-            <div id="progress-bar"></div>
-        </div>
-        <p id="progress-text">Question 1 of 4</p>
-    </div>
-    
-    <div id="quiz-area" class="quiz-body">
-        <div id="question-container">
-            <h2 id="question">Question text goes here</h2>
-            <div id="answer-buttons" class="btn-grid">
-                <!-- Answer buttons will be injected here -->
+    <!-- Start Screen -->
+    <div id="start-screen" class="screen active">
+        <div class="start-card">
+            <div class="trophy-icon">🏆</div>
+            <h1>Quiz Master</h1>
+            <p>Test your general knowledge with 5 exciting questions. Good luck!</p>
+            <div class="start-stats">
+                <div class="stat"><span>5</span><small>Questions</small></div>
+                <div class="stat"><span>10s</span><small>Per Question</small></div>
+                <div class="stat"><span>5</span><small>Score</small></div>
             </div>
-            <div id="fill-in-blank-container" style="display:none;" class="fill-blank-area">
-                <input type="text" id="answer-input" placeholder="Type your answer...">
-                <button id="submit-answer-btn" class="btn primary-btn">Submit Answer</button>
+            <button id="start-btn" class="btn-main">Start Quiz</button>
+        </div>
+    </div>
+
+    <!-- Quiz Screen -->
+    <div id="quiz-screen" class="screen">
+        <div class="quiz-card">
+            <div class="quiz-top-bar">
+                <div class="score-badge">Score: <span id="live-score">0</span></div>
+                <div class="timer-wrapper">
+                    <svg class="timer-ring" viewBox="0 0 36 36">
+                        <circle class="ring-bg" cx="18" cy="18" r="15.9"/>
+                        <circle id="timer-circle" class="ring-progress" cx="18" cy="18" r="15.9"/>
+                    </svg>
+                    <span id="timer-text">10</span>
+                </div>
+                <div class="q-counter"><span id="current-q">1</span>/<span id="total-q">5</span></div>
             </div>
+
+            <div class="progress-bar-wrapper">
+                <div id="progress-bar" class="progress-bar"></div>
+            </div>
+
+            <div class="question-area">
+                <div id="question-category" class="category-tag">Geography</div>
+                <h2 id="question-text">Question text appears here...</h2>
+            </div>
+
+            <div id="options-grid" class="options-grid"></div>
+
+            <div id="fill-area" class="fill-area" style="display:none;">
+                <input type="text" id="fill-input" placeholder="Type your answer here...">
+                <button id="submit-fill-btn" class="btn-submit">✓ Submit</button>
+            </div>
+
+            <div id="feedback-box" class="feedback-box hide"></div>
+
+            <button id="next-btn" class="btn-next hide">Next Question →</button>
         </div>
-        <button id="next-btn" class="btn next-btn hide">Next Question</button>
     </div>
-    
-    <div id="score-area" class="hide score-body">
-        <h2>Quiz Completed!</h2>
-        <div class="score-circle">
-            <span id="score">0</span><span class="total">/</span><span id="total-questions">0</span>
+
+    <!-- Result Screen -->
+    <div id="result-screen" class="screen">
+        <div class="result-card">
+            <div id="result-emoji" class="result-emoji">🎉</div>
+            <h2 id="result-title">Excellent!</h2>
+            <p id="result-subtitle">You really know your stuff!</p>
+            <div class="final-score-ring">
+                <svg viewBox="0 0 120 120">
+                    <circle cx="60" cy="60" r="50" class="score-ring-bg"/>
+                    <circle cx="60" cy="60" r="50" id="score-ring-fill" class="score-ring-fill"/>
+                </svg>
+                <div class="final-score-text">
+                    <span id="final-score">0</span>
+                    <small>out of 5</small>
+                </div>
+            </div>
+            <div class="answer-summary" id="answer-summary"></div>
+            <button id="restart-btn" class="btn-main">Play Again 🔄</button>
         </div>
-        <p>Great effort! Want to try again?</p>
-        <button id="restart-btn" class="btn primary-btn">Restart Quiz</button>
     </div>
-</div>
 
 <script src="script.js"></script>
 </body>
