@@ -1,31 +1,46 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Quiz Game</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Master</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="quiz-container">
-    <h1>General Knowledge Quiz</h1>
+    <div class="quiz-header">
+        <h1>Knowledge Quiz</h1>
+        <div class="progress-container">
+            <div id="progress-bar"></div>
+        </div>
+        <p id="progress-text">Question 1 of 4</p>
+    </div>
     
-    <div id="quiz-area">
+    <div id="quiz-area" class="quiz-body">
         <div id="question-container">
             <h2 id="question">Question text goes here</h2>
             <div id="answer-buttons" class="btn-grid">
                 <!-- Answer buttons will be injected here -->
             </div>
-            <div id="fill-in-blank-container" style="display:none;">
-                <input type="text" id="answer-input" placeholder="Type your answer here">
-                <button id="submit-answer-btn" class="btn">Submit Answer</button>
+            <div id="fill-in-blank-container" style="display:none;" class="fill-blank-area">
+                <input type="text" id="answer-input" placeholder="Type your answer...">
+                <button id="submit-answer-btn" class="btn primary-btn">Submit Answer</button>
             </div>
         </div>
-        <button id="next-btn" class="btn hide">Next Question</button>
+        <button id="next-btn" class="btn next-btn hide">Next Question</button>
     </div>
     
-    <div id="score-area" class="hide">
-        <h2>Your Score: <span id="score">0</span> out of <span id="total-questions">0</span></h2>
-        <button id="restart-btn" class="btn">Restart Quiz</button>
+    <div id="score-area" class="hide score-body">
+        <h2>Quiz Completed!</h2>
+        <div class="score-circle">
+            <span id="score">0</span><span class="total">/</span><span id="total-questions">0</span>
+        </div>
+        <p>Great effort! Want to try again?</p>
+        <button id="restart-btn" class="btn primary-btn">Restart Quiz</button>
     </div>
 </div>
 

@@ -9,6 +9,8 @@ const restartButton = document.getElementById('restart-btn');
 const fillInBlankContainer = document.getElementById('fill-in-blank-container');
 const answerInput = document.getElementById('answer-input');
 const submitAnswerBtn = document.getElementById('submit-answer-btn');
+const progressBar = document.getElementById('progress-bar');
+const progressText = document.getElementById('progress-text');
 
 let currentQuestionIndex = 0;
 let score = 0;
@@ -60,8 +62,15 @@ function startQuiz() {
     showQuestion();
 }
 
+function updateProgress() {
+    const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
+    progressBar.style.width = `${progress}%`;
+    progressText.innerText = `Question ${currentQuestionIndex + 1} of ${questions.length}`;
+}
+
 function showQuestion() {
     resetState();
+    updateProgress();
     let currentQuestion = questions[currentQuestionIndex];
     questionElement.innerText = currentQuestion.question;
 
@@ -81,7 +90,7 @@ function showQuestion() {
         });
     } else if (currentQuestion.type === 'fill') {
         answerButtonsElement.style.display = 'none';
-        fillInBlankContainer.style.display = 'block';
+        fillInBlankContainer.style.display = 'flex';
         answerInput.value = '';
     }
 }
@@ -108,7 +117,7 @@ function selectAnswer(e) {
     if (questions.length > currentQuestionIndex + 1) {
         nextButton.classList.remove('hide');
     } else {
-        nextButton.innerHTML = 'Finish Quiz';
+        nextButton.innerHTML = 'See Results';
         nextButton.classList.remove('hide');
     }
 }
@@ -119,9 +128,11 @@ submitAnswerBtn.onclick = function() {
     
     if (userAnswer === currentQuestion.correctAnswer.toUpperCase()) {
         score++;
-        answerInput.style.backgroundColor = '#d4edda';
+        answerInput.style.borderColor = '#2ed573';
+        answerInput.style.backgroundColor = '#eafaf1';
     } else {
-        answerInput.style.backgroundColor = '#f8d7da';
+        answerInput.style.borderColor = '#ff4757';
+        answerInput.style.backgroundColor = '#ffecec';
     }
     
     submitAnswerBtn.disabled = true;
@@ -130,7 +141,7 @@ submitAnswerBtn.onclick = function() {
     if (questions.length > currentQuestionIndex + 1) {
         nextButton.classList.remove('hide');
     } else {
-        nextButton.innerHTML = 'Finish Quiz';
+        nextButton.innerHTML = 'See Results';
         nextButton.classList.remove('hide');
     }
 };
@@ -154,6 +165,7 @@ nextButton.addEventListener('click', () => {
     if (currentQuestionIndex < questions.length) {
         submitAnswerBtn.disabled = false;
         answerInput.disabled = false;
+        answerInput.style.borderColor = '#dfe4ea';
         answerInput.style.backgroundColor = 'white';
         showQuestion();
     } else {
@@ -166,6 +178,7 @@ function showScore() {
     scoreArea.classList.remove('hide');
     scoreElement.innerText = score;
     totalQuestionsElement.innerText = questions.length;
+    progressText.innerText = "Quiz Completed";
 }
 
 restartButton.addEventListener('click', startQuiz);
